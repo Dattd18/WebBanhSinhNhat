@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JangmiCake - Tiệm Bánh Sinh Nhật</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FDF5E6;
+            /* Màu vàng nhạt chủ đạo */
+            --accent-color: #FFC107;
+            --secondary-color: #FF9800;
+            --text-color: #5D4037;
+            --light-text: #8D6E63;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: #FFF9E6;
+        }
+
+        /* Header */
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--secondary-color) !important;
+        }
+
+        .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--primary-color);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80"><path fill="%23FFF9E6" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,56C672,48,768,32,864,32C960,32,1056,48,1152,53.3C1248,59,1344,53,1392,50.7L1440,48L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+        }
+
+        .feature-card {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 0;
+            background-color: var(--primary-color);
+            position: relative;
+        }
+
+        .products::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80"><path fill="%23FFF9E6" fill-opacity="1" d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,42.7C672,32,768,32,864,42.7C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .product-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            background-color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 350px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+        }
+
+        .testimonial-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 4rem;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: var(--primary-color);
+            font-family: Georgia, serif;
+            opacity: 0.3;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        .author-info h5 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: var(--light-text);
+            margin: 0;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--primary-color);
+            position: relative;
+        }
+
+        .contact::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80"><path fill="%23FFF9E6" fill-opacity="1" d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,42.7C672,32,768,32,864,42.7C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-control {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+            border-color: var(--accent-color);
+        }
+
+        .contact-info {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #5D4037;
+            padding: 4rem 0 0;
+            color: #fff;
+        }
+
+        .footer-heading {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-social {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .footer-bottom {
+            background-color: #4E342E;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">JangmiCake</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="product.html">Sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.html">Đánh giá</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Liên hệ</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="tableproduct.html">Bảng Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html"><i class="fas"></i> Đăng Nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html"><i class="fas "></i> Đăng Ký</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Bánh Sinh Nhật Tuyệt Vời</h1>
+                    <p>JangmiCake tự hào mang đến những chiếc bánh sinh nhật ngon nhất, đẹp nhất và ý nghĩa nhất cho
+                        ngày đặc biệt của bạn.</p>
+                    <a href="#products" class="btn btn-primary">Xem bánh ngay</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="./image/banner1.jpg" alt="Bánh sinh nhật JangmiCake" class="img-fluid rounded-3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bánh Sinh Nhật Nổi Bật</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="./image/b1.jpg" alt="Bánh Chocolate" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Bánh Chocolate Hạnh Nhân</h3>
+                            <div class="product-price">350.000đ</div>
+                            <p>Bánh chocolate thơm ngon với lớp kem bơ hạnh nhân béo ngậy và trang trí tinh tế.</p>
+                            <a href="#" class="btn btn-primary">Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="./image/b2.jpg" alt="Bánh Vanilla" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Bánh Vanilla Trái Cây</h3>
+                            <div class="product-price">320.000đ</div>
+                            <p>Bánh vanilla mềm mịn với lớp kem tươi và trái cây tươi theo mùa phủ bên trên.</p>
+                            <a href="#" class="btn btn-primary">Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="./image/b3.jpg" alt="Bánh Red Velvet" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Bánh Red Velvet</h3>
+                            <div class="product-price">380.000đ</div>
+                            <p>Bánh Red Velvet đỏ rực rỡ với lớp kem phô mai mịn màng, hương vị đậm đà.</p>
+                            <a href="#" class="btn btn-primary">Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bánh Sinh Nhật Ưa Chuộng -->
+    <!-- Bảng Bánh Sinh Nhật -->
+    <section class="products" id="cake-table">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bảng Tất Cả Bánh Có Tại Cửa Hàng Kèm Giá</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle text-center bg-white shadow">
+                    <thead class="table-warning">
+                        <tr>
+                            <th>Hình ảnh</th>
+                            <th>Tên Bánh</th>
+                            <th>Mô tả</th>
+                            <th>Giá</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="./image/b4.jpg" alt="Matcha" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Matcha Nhật Bản</td>
+                            <td>Hương vị trà xanh Nhật Bản đậm đà, kết hợp kem tươi nhẹ nhàng.</td>
+                            <td>200.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b5.jpg" alt="Mousse" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Mousse Trái Cây</td>
+                            <td>Hương vị trái cây mát lạnh, nhẹ nhàng, lý tưởng cho mùa hè.</td>
+                            <td>320.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Tiramisu Ý</td>
+                            <td>Vị cà phê đậm đà kết hợp phô mai mascarpone mịn màng.</td>
+                            <td>250.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b1.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Mousse Trà Xanh</td>
+                            <td>Hương vị matcha thanh mát kết hợp cùng kem tươi nhẹ nhàng.</td>
+                            <td>250.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b2.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Cheesecake Nhật
+                            </td>
+                            <td>Bánh phô mai siêu nhẹ, mềm tan trong miệng như mây.</td>
+                            <td>150.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b3.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Opera Pháp</td>
+                            <td>Từng lớp bánh, cà phê và socola tạo nên vị sang trọng.</td>
+                            <td>250.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b7.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Tiramisu Ý</td>
+                            <td>Vị cà phê đậm đà kết hợp phô mai mascarpone mịn màng.</td>
+                            <td>300.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b4.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Caramel Flan</td>
+                            <td>Mềm mượt, tan chảy, phủ lớp caramel vàng óng ngọt ngào.</td>
+                            <td>200.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/bk1.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Brownie Socola</td>
+                            <td>Đậm vị socola nguyên chất, giòn nhẹ bên ngoài, mềm ẩm bên trong.</td>
+                            <td>170.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/bk2.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Tart Chanh</td>
+                            <td>Vị chua thanh từ chanh tươi trên nền tart giòn rụm.</td>
+                            <td>250.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/bk3.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Bắp Kem Tươi</td>
+                            <td>Hương thơm bắp nướng hòa quyện cùng lớp kem sữa béo mịn.</td>
+                            <td>150.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b10.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Tiramisu Ý</td>
+                            <td>Vị cà phê đậm đà kết hợp phô mai mascarpone mịn màng.</td>
+                            <td>450.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/bk7.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Bông Lan Trứng Muối</td>
+                            <td>Mặn ngọt hoà quyện với sốt trứng muối béo ngậy.</td>
+                            <td>100.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b12.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Gato Trái Cây</td>
+                            <td>Lớp kem tươi xen trái cây tươi mát, dịu nhẹ cho mọi dịp.
+                            </td>
+                            <td>250.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./image/b13.jpg" alt="Tiramisu" class="img-fluid" style="width: 120px;"></td>
+                            <td>Bánh Chiffon Cam</td>
+                            <td>Mềm xốp nhẹ như mây, thoang thoảng hương cam tươi.
+                            </td>
+                            <td>150.000đ</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">Thêm vào giỏ</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Liên hệ với chúng tôi</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-form">
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Họ và tên</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Tin nhắn</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <h3>Thông tin liên hệ</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Địa chỉ</h5>
+                                <p>123 Đường Lê Lợi, Quận 1, TP. Hồ Chí Minh</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Điện thoại</h5>
+                                <p>028 1234 5678</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email</h5>
+                                <p>info@jangmicake.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Giờ mở cửa</h5>
+                                <p>Thứ 2 - Chủ nhật: 8:00 - 21:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <h3 class="footer-heading">JangmiCake</h3>
+                    <p>Chuyên cung cấp bánh sinh nhật chất lượng cao, với nhiều mẫu mã đa dạng và hương vị tuyệt vời.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h3 class="footer-heading">Liên kết nhanh</h3>
+                    <a href="#" class="footer-link">Trang chủ</a>
+                    <a href="#products" class="footer-link">Sản phẩm</a>
+                    <a href="#testimonials" class="footer-link">Đánh giá</a>
+                    <a href="#contact" class="footer-link">Liên hệ</a>
+                    <a href="#" class="footer-link">Giỏ hàng</a>
+                    <a href="#" class="footer-link">Chính sách bảo mật</a>
+                    <a href="#" class="footer-link">Điều khoản dịch vụ</a>
+                    <a href="#" class="footer-link">Hỗ trợ khách hàng</a>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h3 class="footer-heading">Đăng ký nhận tin</h3>
+                    <p>Nhận thông tin mới nhất về sản phẩm và ưu đãi từ chúng tôi.</p>
+                    <form action="#" method="post">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Email của bạn" aria-label="Email"
+                                required>
+                            <button class="btn btn-primary" type="submit">Đăng ký</button>
+                        </div>
+                    </form>
+                    <h3 class="footer-heading">Theo dõi chúng tôi</h3>
+                    <p>Theo dõi chúng tôi trên mạng xã hội để cập nhật thông tin mới nhất.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <p>&copy; 2025 JangmiCake. Tất cả các quyền được bảo lưu.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
